@@ -1,0 +1,27 @@
+@mixin parallelogram($angle) {
+  transform: skew($angle);
+}
+
+@mixin trapezoid() {
+  transform: perspective(200px) rotateX(40deg); 
+  // border-bottom: 100px solid red;
+  // border-left: 25px solid transparent;
+  // border-right: 25px solid transparent;
+  // height: 0;
+  // width: 100px;  
+}
+
+@mixin img-responsive() {
+	max-width: 100%;
+	height: auto;
+	display:block;
+}
+
+
+@function set-font-color($color) {
+	@if(lightness($color) > 70) {
+		@return $oil;
+	} @else {
+		@return $smoke;
+	}
+} 
