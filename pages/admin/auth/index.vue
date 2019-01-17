@@ -26,7 +26,7 @@
       return {
         isLogin: true,
         email: 'warintaksinpruk@gmail.com',
-        password: 'pastaword',
+        password: '',
       }
     },
     methods: {
