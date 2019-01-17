@@ -1,8 +1,9 @@
 <template>
   <div class="posts-page">
-    <v-layout row wrap v-if="loadedPosts.length">
-      <v-flex v-for="(post) in loadedPosts" xs12 sm6 md4 lg3 :key="post.id">
-        <PostCard  
+    <v-layout row wrap v-if="loadedPosts.length" class="post-list">
+      <v-flex class="postcard-wrapper" v-for="(post) in loadedPosts" xs12 sm6 md4 lg3 :key="post.id">
+        <PostCard
+          :href="'/posts/'+post.id"  
           :post="post"
           :key="'post-'+post.title" />
       </v-flex>
@@ -37,5 +38,15 @@
 <style scoped lanfg="scss">
   .posts-page {
     margin-top: 48px;
+  }
+
+  .postcard-wrapper {
+    /* margin-left: 1.5%;
+    margin-right: 1.5%;  */
+  }
+
+  .post-list {
+    margin-top: 96px;
+
   }
 </style>

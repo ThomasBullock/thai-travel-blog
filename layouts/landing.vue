@@ -5,7 +5,7 @@
           <div class="navigation">
             <nuxt-link class="elevation-1 chom-btn" to="/"><i class="large material-icons">home</i></nuxt-link>
             <nuxt-link class="elevation-1 chom-btn" to="/posts"><span>Posts</span></nuxt-link>
-            <nuxt-link class="elevation-1 chom-btn" to="/who"><span>Who</span></nuxt-link>
+            <!-- <nuxt-link class="elevation-1 chom-btn" to="/who"><span>Who</span></nuxt-link> -->
           </div>
 
           <div lg1 class="admin">

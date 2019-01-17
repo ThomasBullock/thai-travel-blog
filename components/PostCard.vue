@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link :to="'/posts/'+post.id" >
+  <nuxt-link :to="href" >
     <div class="elevation-2 post-card"
     >
       <v-img class="post-card__stamp" aspect-ratio="1.5456" :src="stamp[Math.floor(Math.random() * 4)]"></v-img>
@@ -14,6 +14,10 @@
     props: {
       post: {
         type: Object,
+        required: true
+      },
+      href: {
+        type: String,
         required: true
       }
     },
@@ -47,7 +51,7 @@
     width: 100%;
     height: auto;
     transition: transform 250ms ease-in;
-    margin-bottom: 24px;
+    // margin-bottom: 24px;
 
     &:hover {
       @include parallelogram(0deg);
