@@ -21,11 +21,14 @@ const createStore = () => {
         return state.loadedPosts
       },
       postById(state, id) {
-        return state.loadedPosts.filter(post => post.id === id)
+        return state.loadedPosts.filter(post => post.id == id)
+      },
+      postsByUser(state) {
+        return state.loadedPosts.filter(post => post.userId == state.userId)
       },
       isLoading(state) {
         return state.uploading
-      }
+      },
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
@@ -163,6 +166,22 @@ const createStore = () => {
           })
           .catch(e => console.log('catch', e));
       },
+      updatePost(vuexContext, updatedPost) {
+        return this.$axios
+          .$put(`https://chom-siam.firebaseio.com/posts/${updatedPost.id}.json?auth=${vuexContext.state.token}`, updatedPost)
+          .then(res => {
+            console.log('response from api', res)
+            vuexContext.commit('UPDATE_POST', { ...postData, id: res.name} )
+          })
+      },
+      deletePost(vuexContext, id) {
+        console.log(id)
+        return this.$axios
+          .$delete(`https://chom-siam.firebaseio.com/posts/${id}.json?auth=${vuexContext.state.token}`)
+          .then(res => {
+            vuexContext.commit('DELETE_POST', id)
+          })
+      },
       getUsers(vuexContext) {
         return this.$axios.$get('/users.json')
         .then(data => {
@@ -175,6 +194,11 @@ const createStore = () => {
       ADD_POST(state, post) {
         console.log(post)
         state.loadedPosts.push(post)
+      },
+      DELETE_POST(state, id) {
+        const index = state.loadedPosts.findIndex((post => post.id == id))
+        console.log(index, id)
+        state.loadedPosts.splice(index, 1);
       },
       SET_USERLIST(state, users) {
         state.users = users
