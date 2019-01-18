@@ -19,5 +19,7 @@
 </script>
 
 <style scoped>
-
+  .title {
+    margin-left: 130px;
+  }
 </style>

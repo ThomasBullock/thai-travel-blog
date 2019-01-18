@@ -31,7 +31,7 @@
 
     methods: { 
       autocomplete(input) {
-        var countryRestrict = {'country': 'AU'}
+        var countryRestrict = {'country': 'TH'}
         if(!input) {
           return
         }

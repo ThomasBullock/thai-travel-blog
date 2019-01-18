@@ -55,6 +55,8 @@
     width: 600px;
     height: 100px;
     text-align: center;
+    // display: flex;
+    // justify-content: center;
   }
 
   .panel--aqua {
@@ -62,7 +64,7 @@
     position: relative;
     z-index: 300;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;    
     background: $aqua;
     border: $strong-border;
@@ -91,6 +93,7 @@
 
   .landing__heading {
     color: $ebony;
+
   }
 
   .landing__sub-heading {

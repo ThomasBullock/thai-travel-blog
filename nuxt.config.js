@@ -74,11 +74,11 @@ module.exports = {
     }
   },
   env: {
-    googleMapsAPIKey: process.env.GOOGLE_MAPS_API_KEY,  // || 'AIzaSyBgmhtgIlAUNMa11QW0uPzFPnsI76OAv64',
-    baseUrl: process.env.BASE_URL, //|| 'https://chom-siam.firebaseio.com',
-    fbAPIKey: process.env.FIREBASE_API, //'AIzaSyBoy2VpH5Br92CqzjjKUGIwZHMrGBTOCdQ',
-    cloudinaryName: process.env.CLOUDINARY_NAME, //|| 'chomsiam',
-    cloudinaryKey: process.env.CLOUDINARY_KEY, //|| '416414737264537',
-    cloudinarySecret: process.env.CLOUDINARY_SECRET, //  'VJf7rxHneFL3R69E4rxRvkGE9Oo',
+    googleMapsAPIKey: process.env.GOOGLE_MAPS_API_KEY,  
+    baseUrl: process.env.BASE_URL, 
+    fbAPIKey: process.env.FIREBASE_API, 
+    cloudinaryName: process.env.CLOUDINARY_NAME,
+    cloudinaryKey: process.env.CLOUDINARY_KEY, 
+    cloudinarySecret: process.env.CLOUDINARY_SECRET, 
   }
 }
