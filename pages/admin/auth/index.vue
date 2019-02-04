@@ -25,7 +25,7 @@
     data() {
       return {
         isLogin: true,
-        email: 'warintaksinpruk@gmail.com',
+        email: '',
         password: '',
       }
     },

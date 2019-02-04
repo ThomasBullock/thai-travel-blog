@@ -15,7 +15,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: pkg.description },
       {
         'property':  'og:title',
-        'content':  'Chom Saim - A Thai Travel Blog' //`${this.news.title}`,
+        'content':  'Chom Siam - A Thai Travel Blog' //`${this.news.title}`,
       },
       {
         'property':  'og:description',
