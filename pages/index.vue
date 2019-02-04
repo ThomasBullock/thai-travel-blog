@@ -1,16 +1,19 @@
 <template>
   <v-layout
-    column
     justify-center
-    align-center>
+    wrap
+    >
+    <div class="home__logo-wrapper">
+      <LogoHeader subHeading="A Thai Travel Blog"/>
+    </div>
     <v-flex
       xs12
-      sm8
-      md6>
-      <div class="text-xs-center">
-        <LogoHeader subHeading="A Thai Travel Blog"/>
+      sm10
+      md8
+      lg6
+      align-self-center
+    >
         <h5 class="prompt">This site is still a work in progess so please excuse the occasional mess....</h5>
-      </div>
     </v-flex>
 
   </v-layout>
@@ -35,10 +38,16 @@
     
   }
 
-
+  .home__logo-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .prompt {
-    margin-top: 96px;
+    text-align: center;
+    margin-top: 48px;
     font-family: 'futura', sans-serif;
   } 
 

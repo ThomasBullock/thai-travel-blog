@@ -56,7 +56,7 @@
           v-validate="'required'"
         ></v-textarea>
       </v-flex>
-      <v-layout>
+      <v-layout v-if="!postData">
         <v-flex xs12 md4 lg2 offset-md1 offset-lg3 >
           <FileUpload v-for="(item, i) in new Array(images.length + 1)" label="Upload a photo" 
             accept="image/gif, image/jpeg, image/png" 
@@ -81,7 +81,8 @@
         </v-flex>
       </v-layout>
       <v-flex md10 lg6 offset-md1 offset-lg3>
-        <v-btn @click="validateBeforeSubmit">submit</v-btn>
+        <v-btn v-if="!postData" @click="validateBeforeSubmit">submit</v-btn>
+        <v-btn v-else @click="validateBeforeSubmit">save</v-btn>
       </v-flex>                
     </form>
     <v-container
@@ -96,7 +97,7 @@
         >
           <v-card>
             <v-img
-              :src="generateThumbnail(image)"
+              :src="resizeCloudinaryImg(image, 400, 600)"
               height="auto"
             >
               <v-container
@@ -143,6 +144,7 @@
   import FileUpload from '@/components/FileUpload';
   import Alert from '@/components/Alert';
   import GoogleMapsAutoComplete from '@/components/GoogleMapsAutoComplete';
+  import { resizeCloudinaryImg } from '@/helpers'
 
   export default {
     name: 'NewPost',
@@ -153,8 +155,13 @@
       Alert
     },
     props: {
-      formHeading: String,
-      required: true
+      formHeading:  {
+        type: String,
+        required: true,
+      },
+      postData: {
+        type: Object
+      }
     },
     data() {
       return {
@@ -185,12 +192,7 @@
                     this.alert = null;
             }, 3000);
       },
-      generateThumbnail(image) {
-        let array = image.split('/')
-        array.splice(6, 0, 'c_limit,h_200,w_300')
-        const thumbnail = array.join('/')
-        return thumbnail;
-      },
+      resizeCloudinaryImg: resizeCloudinaryImg,
       uploadFile(file) {
         console.log(file);
         this.$store.dispatch('uploadPhoto', { title: this.title, file: file })
@@ -234,6 +236,14 @@
         })
       }      
     },
+    mounted() {
+      if(this.postData) {
+        this.title = this.postData.title
+        this.text = this.postData.text
+        this.date = this.postData.date
+        this.carousel = this.postData.carousel
+      }
+    }
     
   }
 </script>

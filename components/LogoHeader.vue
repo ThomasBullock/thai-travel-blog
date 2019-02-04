@@ -1,8 +1,8 @@
 <template>
   <div class="landing__hero">
-    <Logo/> 
+    <Logo v-show="$vuetify.breakpoint.smAndUp"/> 
     <div class="elevation-1 panel panel--aqua">
-      <Title v-if="!title" />
+      <Title v-if="!title" :width="($vuetify.breakpoint.smAndUp) ? 440: 280"/>
       <h1 class="landing__heading">{{title}}</h1>
     </div>
     <div class="elevation-1 panel panel--peach">
@@ -41,22 +41,15 @@
 
   .logo {
     position: absolute;
-    left: -30px;
+    left: 0;
     top: -25px;
     z-index: 500;
 
   }
 
-  .title {
-    transform: skew(-10deg);
-  }
-
   .panel {
-    width: 600px;
     height: 100px;
-    text-align: center;
-    // display: flex;
-    // justify-content: center;
+
   }
 
   .panel--aqua {
@@ -64,26 +57,41 @@
     position: relative;
     z-index: 300;
     display: flex;
-    justify-content: center;
-    align-items: center;    
+    align-items: center;
+    justify-content: center;   
     background: $aqua;
     border: $strong-border;
-    padding-right: 24px;
+    width: 500px;
+    margin-left: 120px;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      margin-left: 0;
+    }
+
 
     h1 {
       transform: skew(-10deg);
+      // width: 100%;
+      padding-left: 20px;
     }
   }
 
   .panel--peach {
     @include parallelogram(10deg);
-    // trapezoid
+    width: 610px;
+    text-align: center;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      left: 0;
+    }    
     background: $peach;
     border: $strong-border;
 
     position: absolute;
-    left: -40px;
-    top: 50px;    
+    top: 50px;
+    left: 0;    
 
     h2 {
       transform: skew(-10deg);

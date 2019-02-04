@@ -5,7 +5,7 @@
         <LogoHeader :title="post.title" :subHeading="$dayjs(post.date).format('dddd, MMMM DD, YYYY')"/>
       </v-flex>
     </v-layout>
-    <v-img v-if="userDetails" class="avatar"
+    <v-img v-if="userDetails && $vuetify.breakpoint.name != 'xs'" class="avatar"
       max-width=125 
       max-height=125
       :src="userDetails.avatar" 
@@ -22,18 +22,22 @@
         <p class="blog__text">{{post.text}}</p>
       </v-flex>
     </v-layout>
-    <v-carousel v-if="post.images && post.images.length > 1 && post.carousel">
-      <v-carousel-item
-        v-for="(image,i) in post.images"
-        :key="i"
-        :src="image.url"
-      ></v-carousel-item>
-    </v-carousel>
+    <v-layout row  v-if="post.images && post.images.length > 1 && post.carousel">
+      <v-flex s12 sm12 md10 lg8 offset-md1 offset-lg2>
+        <v-carousel :height="($vuetify.breakpoint.lgAndUp) ? 700 : 600">
+          <v-carousel-item
+            v-for="(image,i) in post.images"
+            :key="i"
+            :src="($vuetify.breakpoint.name == 'xs') ? resizeCloudinaryImg(image.url, 600, 600) : resizeCloudinaryImg(image.url, 800, 1200)"
+          ></v-carousel-item>
+        </v-carousel>
+      </v-flex>
+    </v-layout>
     <!-- <PhotoGrid v-else-if="post.images && post.images.length" :images="post.images"/> -->
     <v-flex v-else xs12 sm12 md10 lg8 offset-md1 offset-lg2 v-for="(image, i) in post.images" :key="'image-'+i">
       <v-img
         class="post__image"
-        :src="image.url" 
+        :src="($vuetify.breakpoint.name == 'xs') ? resizeCloudinaryImg(image.url, 600, 600) : resizeCloudinaryImg(image.url, 800, 1200)" 
         :alt="image.caption"
       ></v-img>
       <div 
@@ -47,6 +51,7 @@
 <script>
   import PhotoGrid from '@/components/PhotoGrid'
   import LogoHeader from '~/components/LogoHeader.vue'
+  import { resizeCloudinaryImg } from '@/helpers'
 
   export default {
     name: 'Post',
@@ -57,7 +62,6 @@
     computed: {
       userDetails() {
         return this.$store.state.users[this.post.userId]
-        // return (this.post) ? this.$store.state.users[this.post.userId] : null
       }
     }, 
     asyncData(context) { // in asyncData we dont have access to this because asynsData happens before the compoment is created
@@ -68,11 +72,15 @@
           }
         })
         .catch(e => context.error(e))
+    },
+    methods: {
+      resizeCloudinaryImg: resizeCloudinaryImg
     },    
     mounted() {
       console.log(this.$store.state.loadedPosts);
       console.log('route params ' + this.$route.params.id);
     }
+
   }
 </script>
 
@@ -110,6 +118,7 @@
     border-top: $strong-border; 
     border-bottom: $strong-border;
     background: $peach;
+    color: $ebony;
 
     &--last {
       border-bottom: $strong-border;

@@ -1,7 +1,8 @@
 <template>
     <div class="background">
       <v-container fluid class="landing">
-        <v-layout row justify-space-between class="topbar">
+
+        <v-layout row justify-space-between :wrap="$vuetify.breakpoint.xsOnly" class="topbar">
           <div class="navigation">
             <nuxt-link class="elevation-1 chom-btn" to="/"><i class="large material-icons">home</i></nuxt-link>
             <nuxt-link class="elevation-1 chom-btn" to="/posts"><span>Posts</span></nuxt-link>
@@ -19,7 +20,7 @@
 
 <script>
   export default {
-    
+
   }
 </script>
 
@@ -28,15 +29,19 @@
 
   .background {
     width: 100%;
-    height: 100vh;
+    height: 100%; //100vh;
     padding: 0;
     margin: 0;
+    background: linear-gradient(0deg, rgba(177, 84, 12, .7), rgba(80, 208, 227, .8)), 
+      url('https://res.cloudinary.com/chomsiam/image/upload/c_scale,q_61,w_1200/v1547584872/thailand/kjetbpypargdvp2rpcee.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;    
   }
-
 
   .chom-btn {
     @include parallelogram(15deg);
-    width: 150px;
+    // width: 150px;
+    flex: 1 1 150px;
     height: 42px;
     border: solid 1px $black;
     position: relative;
@@ -61,7 +66,10 @@
   }
 
   .topbar {
-    position: fixed;
+    position: absolute;
+    top: 24p;
+    // left: 0;
+    // right: 0;
     width: 100%;
     padding-right: 44px;
   }
@@ -72,22 +80,37 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @media only screen and (max-width: 600px) {
+      flex-wrap: wrap;
+      width: 95%;
+
+      .chom-btn {
+        flex: 1 1 100%;
+      }
+    }
   }
 
   .admin {
     margin-left: 24px;
     font-family: 'Lato', sans-serif;
+
+    @media only screen and (max-width: 600px) {
+      flex-wrap: wrap;
+      width: 95%;
+
+      .chom-btn {
+        flex: 1 1 100%;
+      }
+    }    
   }
 
   .background {
-    background: linear-gradient(0deg, rgba(177, 84, 12, .7), rgba(80, 208, 227, .8)), 
-      url('https://res.cloudinary.com/chomsiam/image/upload/c_scale,q_61,w_1200/v1547584872/thailand/kjetbpypargdvp2rpcee.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+
   }
 
   .landing {
-    height: 100vh;
+    // height: 100vh;
   }
 
 

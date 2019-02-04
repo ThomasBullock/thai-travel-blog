@@ -32,7 +32,6 @@ const createStore = () => {
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
-        console.log(process.env.title)
         let promises = [
           context.app.$axios
             .$get('/posts.json'),
@@ -44,13 +43,15 @@ const createStore = () => {
           .then(res => {
             console.log('WE HAVE DATA')
             // console.log(res)
-            let posts = Object.keys(res[0]).map((post) => {
-                  return {...res[0][post], id: post}
-                });
-            let users = res[1];
-            console.log(users)
-            vuexContext.commit('SET_POSTS', posts)
-            vuexContext.commit('SET_USERLIST', users)
+            if(res[0] && res[1]) {
+              let posts = Object.keys(res[0]).map((post) => {
+                    return {...res[0][post], id: post}
+                  });
+              let users = res[1];
+              console.log(users)
+              vuexContext.commit('SET_POSTS', posts)
+              vuexContext.commit('SET_USERLIST', users)
+            }
             
           })
       },
@@ -157,7 +158,7 @@ const createStore = () => {
 
       },
       createPost(vuexContext, postData) {
-        console.log(postData)
+        // console.log(postData)
         return this.$axios
           .$post(`https://chom-siam.firebaseio.com/posts.json?auth=${vuexContext.state.token}`, postData)
           .then(res => {
@@ -171,11 +172,10 @@ const createStore = () => {
           .$put(`https://chom-siam.firebaseio.com/posts/${updatedPost.id}.json?auth=${vuexContext.state.token}`, updatedPost)
           .then(res => {
             console.log('response from api', res)
-            vuexContext.commit('UPDATE_POST', { ...postData, id: res.name} )
+            vuexContext.commit('UPDATE_POST', { ...updatedPost, id: res.name} )
           })
       },
       deletePost(vuexContext, id) {
-        console.log(id)
         return this.$axios
           .$delete(`https://chom-siam.firebaseio.com/posts/${id}.json?auth=${vuexContext.state.token}`)
           .then(res => {
@@ -185,7 +185,6 @@ const createStore = () => {
       getUsers(vuexContext) {
         return this.$axios.$get('/users.json')
         .then(data => {
-          console.log(data)
           vuexContext.commit('SET_USERLIST', data)
         })        
       }      

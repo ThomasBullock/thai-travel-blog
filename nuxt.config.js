@@ -12,7 +12,19 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
+      {
+        'property':  'og:title',
+        'content':  'Chom Saim - A Thai Travel Blog' //`${this.news.title}`,
+      },
+      {
+        'property':  'og:description',
+        'content':  'Tom and Waz\'s travels through Phuket, Phi Phi Islands and Bangkok'  //`${this.project.content}`.replace(/<\/?[^>]+(>|$)/g, ""),
+      },
+      {
+        'property':  'og:image',
+        'content': 'http://res.cloudinary.com/chomsiam/image/upload/c_limit,h_800,w_800/v1549182857/thailand/jgus54aaepkpt9ca8u6u.jpg'
+      }          
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },

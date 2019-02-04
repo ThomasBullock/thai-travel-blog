@@ -17,7 +17,7 @@
     },
     methods: {
       handleSubmit(postData) {
-        console.log(postData)
+        // console.log(postData)
         this.$store.dispatch('createPost', postData)
         .then(res => {
           this.$router.push('/posts')

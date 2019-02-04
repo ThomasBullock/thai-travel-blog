@@ -3,25 +3,27 @@
     <h2>Edit post</h2>
     <h4>{{postData.title}}</h4>
     <p>{{postData.text}}</p>
-    <!-- <BlogPostForm
+    <BlogPostForm
       :postData="postData"
-      formHeading="Create a new post"
-      @submit="handleSubmit"
-    /> -->
+      formHeading="Edit post"
+      @submit="handleUpdate"
+    />
     <v-btn color="warning" @click="deletePost">Delete</v-btn>
   </div>
 </template>
 
 <script>
   import { mapGetters } from 'vuex';
-
+  import BlogPostForm from '@/components/BlogPostForm';
   export default {
     name: 'EditPost',
     middleware: ['check-auth', 'auth'], //order important!
+    components: {
+      BlogPostForm 
+    },
     methods: {
-      handleSubmit(postData) {
-        console.log(postData)
-        this.$store.dispatch('createPost', postData)
+      handleUpdate(postData) {
+        this.$store.dispatch('updatePost', postData)
         .then(res => {
           this.$router.push('/posts')
         })
@@ -39,6 +41,9 @@
       postData() {
         return this.loadedPosts.filter(post => post.id == this.$route.params.postId)[0];
       }
+    },
+    mounted() {
+      console.log(this.loadedPosts);
     }
 
   }

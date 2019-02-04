@@ -1,5 +1,5 @@
 <template>
-  <svg class="logo" width="152px" height="152px" viewBox="0 0 152 152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg class="logo" :width="'152px'" :height="'152px'" viewBox="0 0 152 152" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
       <defs></defs>
       <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
           <circle id="Oval-2" stroke="#111111" stroke-width="2" fill="#F8E71C" cx="76" cy="76" r="75"></circle>
@@ -9,7 +9,21 @@
       </g>
   </svg>
 </template>
-
+<script>
+  export default {
+    name: 'Logo',
+    props: {
+      width: {
+        type: Number,
+        default: 152
+      },
+      height: {
+        type: Number,
+        default: 152
+      }      
+    }
+  }
+</script>
 <style>
 /* .VueToNuxtLogo {
   display: inline-block;
